@@ -332,7 +332,7 @@ select {
 }
 
 .primary-navigation {
-  --gap: 2rem;
+  --gap: clamp(1.5rem, 5vw, 3.5rem);
   --underline-gap: 2rem;
   list-style: none;
   padding: 0;
@@ -400,13 +400,37 @@ select {
   }
 }
 
-@media (min-width: 35em) and (max-width: 45em) {
+@media (min-width: 35em) {
   .primary-navigation {
-    padding-inline: 3rem;
+    padding-inline: clamp(3rem, 5vw, 7rem);
   }
+}
 
+@media (min-width: 35em) and (max-width: 45em) {
   .primary-navigation a > span {
     display: none;
+  }
+}
+
+@media (min-width: 45em) {
+  .primary-header::after {
+    background: hsl(var(--clr-white) / 0.25);
+    content: "";
+    display: block;
+    position: relative;
+    height: 1px;
+    width: 100%;
+    order: 0;
+    z-index: 100;
+    margin-right: -2.5rem;
+  }
+
+  nav {
+    order: 2;
+  }
+
+  .primary-navigation {
+    margin-block: 2rem;
   }
 }
 
@@ -475,4 +499,23 @@ body {
   .home {
     background-image: url(./assets/home/background-home-desktop.jpg);
   }
+}
+
+.skip-to-content {
+  position: absolute;
+  z-index: 9999;
+  background-color: #514c7e;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  transform: translateY(-100%);
+  transition: transform 500ms ease-in;
+}
+
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+  transform: translateY(0);
+  outline: none;
 }
